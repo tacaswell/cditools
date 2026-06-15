@@ -329,42 +329,52 @@ class DM4(Device):
 
 
 class SAM(Device):
-    c_sm = DDC(
-        {
-            "lrx": (EpicsMotor, "Gon:1-Ax:Rx1}Mtr", {}),
-            "lrz": (EpicsMotor, "Gon:1-Ax:Rz1}Mtr", {}),
-        }
-    )
-    c_lg = DDC(
-        {
-            "lrx": (EpicsMotor, "Gon:1-Ax:Rx2}Mtr", {}),
-            "lrz": (EpicsMotor, "Gon:1-Ax:Rz2}Mtr", {}),
-        }
-    )
-    ly = Cpt(EpicsMotor, "Gon:1-Ax:Y}Mtr")
-    ry = Cpt(EpicsMotor, "Gon:1-Ax:Ry}Mtr")
+
+    # piezo x/y/z
+    lfx = Cpt(EpicsMotor, "Gon:1-Ax:XP}Mtr")
+    lfy = Cpt(EpicsMotor, "Gon:1-Ax:YP}Mtr")
+    lfz = Cpt(EpicsMotor, "Gon:1-Ax:ZP}Mtr")
+    # coarse sample
     t_sm = DDC(
         {
             "lx": (EpicsMotor, "Gon:1-Ax:X1}Mtr", {}),
             "lz": (EpicsMotor, "Gon:1-Ax:Z1}Mtr", {}),
         }
     )
+    # sample small tip/tilt
+    c_sm = DDC(
+        {
+            "lrx": (EpicsMotor, "Gon:1-Ax:Rx1}Mtr", {}),
+            "lrz": (EpicsMotor, "Gon:1-Ax:Rz1}Mtr", {}),
+        }
+    )
+    # sample large tip/tilt
+    c_lg = DDC(
+        {
+            "lrx": (EpicsMotor, "Gon:1-Ax:Rx2}Mtr", {}),
+            "lrz": (EpicsMotor, "Gon:1-Ax:Rz2}Mtr", {}),
+        }
+    )
+    # "goniometer translation" ?
     t_lg = DDC(
         {
             "lx": (EpicsMotor, "Gon:1-Ax:X2}Mtr", {}),
             "lz": (EpicsMotor, "Gon:1-Ax:Z2}Mtr", {}),
         }
     )
-    lfx = Cpt(EpicsMotor, "Gon:1-Ax:XP}Mtr")
-    lfy = Cpt(EpicsMotor, "Gon:1-Ax:YP}Mtr")
-    lfz = Cpt(EpicsMotor, "Gon:1-Ax:ZP}Mtr")
+    # vertical lift
+    ly = Cpt(EpicsMotor, "Gon:1-Ax:Y}Mtr")
+    # yaw
+    ry = Cpt(EpicsMotor, "Gon:1-Ax:Ry}Mtr")
 
 
 class GON(Device):
     sam = Cpt(SAM, "")
     align = DDC(
         {
+            # pitch
             "rx": (EpicsMotor, "Gon:1-Ax:Rx3}Mtr", {}),
+            # roll
             "rz": (EpicsMotor, "Gon:1-Ax:Rz3}Mtr", {}),
             "x": (EpicsMotor, "Gon:1-Ax:X3}Mtr", {}),
             "y": (EpicsMotor, "Gon:1-Ax:Y3}Mtr", {}),
